@@ -21,6 +21,10 @@ function Show ({bread}) {
     )
 }
 
+<form action={`/breads/${index}?_method=DELETE`} method="POST">
+  <input type='submit' value="DELETE"/>
+</form>
+
 module.exports = Show
 
 

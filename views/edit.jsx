@@ -2,6 +2,7 @@ const React = require('react')
 const Default = require('./layouts/Default')
 
 function Edit ({bread, index}) {
+
     return (
       <Default>
         <h2>Edit a bread</h2>
@@ -30,10 +31,14 @@ function Edit ({bread, index}) {
           />
           <br />
           <input type="submit"/>
+        
         </form>
       </Default>
     )
 }
+
+<form action={`/breads/${index}?_method=PUT`} method="POST"> 
+</form>
 
 
 module.exports = Edit

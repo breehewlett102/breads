@@ -17,6 +17,7 @@ function Show ({bread}) {
   </p>
         <img src={bread.image} alt={bread.name}/>
         <li><a href='/breads'>Go home</a></li>
+        <a href={`/breads/${index}/edit`}><button>Edit</button></a>
       </Default>
     )
 }
@@ -24,6 +25,7 @@ function Show ({bread}) {
 <form action={`/breads/${index}?_method=DELETE`} method="POST">
   <input type='submit' value="DELETE"/>
 </form>
+
 
 module.exports = Show
 

@@ -4,14 +4,15 @@ const Bread = require('../models/bread.js')
 
 // INDEX
 breads.get('/', (req, res) => {
-    Bread.find()
-        .then(foundBreads =>{
+  Bread.find()
+      .then(foundBreads => {
           res.render('index', {
-            breads: foundBreads,
-            title: 'Index Page'
+              breads: foundBreads,
+              title: 'Index Page'
           })
-     })
+      })
 })
+
 
 // NEW
 breads.get('/new', (req, res) => {
@@ -29,16 +30,15 @@ breads.get('/:indexArray/edit', (req, res) => {
 // SHOW
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
-      .then(foundBread => {
-          res.render('show', {
-              bread: foundBread
-          })
+    .then(foundBread => {
+      res.render('show', {
+        bread: foundBread
       })
-      .catch(err => {
-        res.send('404')
-      })
+    })
+    .catch(err => {
+      res.send('404')
+    })
 })
-
 
 // CREATE
 breads.post('/', (req, res) => {

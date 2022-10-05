@@ -5,16 +5,42 @@ const Baker = require('../models/baker.js')
 const bakerSeedData = require('../models/baker_seed.js')
 const Baker = require('../models/baker.js')
 
-// in the new route
-breads.get('/new', (req, res) => {
+// Index: 
+baker.get('/', (req, res) => {
     Baker.find()
+        .populate('breads')
         .then(foundBakers => {
-            res.render('new', {
-                bakers: foundBakers
+            res.send(foundBakers)
+        })
+})  
+
+// Show: 
+baker.get('/:id', (req, res) => {
+    Baker.findById(req.params.id)
+        .populate({
+            path: 'breads',
+            options: {limit: 5}
+        })
+        .then(foundBaker => {
+            res.render('bakerShow', {
+                baker: foundBaker
             })
-      })
+        })
 })
 
-// export
-module.exports = baker                    
+// Delete
+baker.delete('/:id', (req,res)=> {
+    Baker.findByIdAndDelete(req.params.id)
+        .then(deletedBaker => {
+            res.status(303).redirect('/breads')
+        })
+})
 
+baker.get('/data/seed', (req, res) => {
+    Baker.insertMany(bakerSeedData)
+        .then(res.redirect('/breads'))
+})
+                
+
+// export
+module.exports = baker             

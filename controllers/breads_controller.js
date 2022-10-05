@@ -16,17 +16,24 @@ breads.get('/', (req, res) => {
 
 // NEW
 breads.get('/new', (req, res) => {
-  res.render('new')
+  Baker.find()
+      .then(foundBakers => {
+          res.render('new', {
+              bakers: foundBakers
+          })
+    })
 })
 
 // EDIT
-breads.get('/:id/edit', (req, res) => {
-  Bread.findById(req.params.id) 
-    .then(foundBread => { 
-      res.render('edit', {
-        bread: foundBread 
-      })
+Baker.find()
+.then(foundBakers => {
+  Bread.findById(req.params.id)
+  .then(foundBread => {
+    res.render('edit', {
+      bread: foundBread,
+      bakers: foundBakers
     })
+  })
 })
 
 // SHOW
